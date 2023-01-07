@@ -1,6 +1,13 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from rest_framework import generics
+from .serializers import CourseSerializer, MyUserSerializer
+from .models import Course, MyUser
 
-# Create your views here.
-def base_view(request):
-    return HttpResponse("<h1>HEllloo</h1>")
+class CourseView(generics.CreateAPIView):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+
+
+class MyUserView(generics.CreateAPIView):
+    queryset = MyUser.objects.all()
+    serializer_class = MyUserSerializer
